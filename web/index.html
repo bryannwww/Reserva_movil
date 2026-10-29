@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ReserVa: reserva tu mesa, descubre la carta y gestiona tus visitas en un solo lugar.">
+  <meta name="theme-color" content="#0A0A0A">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ReserVa">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/Icon-192.png">
+
+  <title>ReserVa — Reservas de restaurante</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #0A0A0A;
+      color: #F5F2EA;
+    }
+
+    #reserva-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      background:
+        radial-gradient(circle at 72% 38%, rgba(201, 169, 97, 0.10), transparent 42%),
+        #0A0A0A;
+      transition: opacity 300ms ease;
+      pointer-events: none;
+    }
+
+    #reserva-splash.rs-hidden {
+      opacity: 0;
+    }
+
+    .rs-mark {
+      width: 82px;
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(201, 169, 97, 0.55);
+      border-radius: 18px;
+      color: #D4B772;
+      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      font-size: 54px;
+      font-weight: 600;
+      line-height: 1;
+      box-shadow: 0 0 42px rgba(201, 169, 97, 0.10);
+    }
+
+    .rs-wordmark {
+      margin-top: 22px;
+      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      color: #F5F2EA;
+    }
+
+    .rs-rule {
+      width: 44px;
+      height: 1px;
+      margin: 18px 0 16px;
+      background: linear-gradient(90deg, #9A7F42, #D4B772);
+    }
+
+    .rs-caption {
+      font-family: "Manrope", "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #A8A296;
+      animation: rs-pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes rs-pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rs-caption { animation: none; opacity: 0.8; }
+      #reserva-splash { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Pantalla de bienvenida mientras Flutter inicia. Se retira al primer frame. -->
+  <div id="reserva-splash" role="status" aria-live="polite" aria-label="Cargando ReserVa">
+    <div class="rs-mark" aria-hidden="true">R</div>
+    <div class="rs-wordmark">ReserVa</div>
+    <div class="rs-rule" aria-hidden="true"></div>
+    <div class="rs-caption">Preparando tu experiencia</div>
+  </div>
+
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var splash = document.getElementById('reserva-splash');
+      if (!splash) return;
+      splash.classList.add('rs-hidden');
+      window.setTimeout(function () {
+        if (splash.parentNode) splash.parentNode.removeChild(splash);
+      }, 320);
+    });
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
